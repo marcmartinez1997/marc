@@ -1,0 +1,33 @@
+
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color:rgb(52, 58, 64)">
+  <div class="container-fluid">
+    <img height=30 width=30 src="assets/img/A-64.png">
+    
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <div class="col-2 espacio " > 
+            <a [routerLink]="['/home']" style="text-decoration: none; " [ngClass]="{ 'blanco': this.arr_botons.home, 'gris': !this.arr_botons.home }" (click)="cambiarcolor($event)">Home</a>
+          </div>
+          <div class="col-2 espacio " > 
+            <a [routerLink]="['/heroes', '']" style="text-decoration: none; " [ngClass]="{ 'blanco': this.arr_botons.heroes, 'gris': !this.arr_botons.heroes }" (click)="cambiarcolor($event)">Heroes</a>
+          </div>
+          <div class="col-2 espacio " > 
+            <a [routerLink]="['/about']" style="text-decoration: none; " [ngClass]="{ 'blanco': this.arr_botons.about, 'gris': !this.arr_botons.about }" (click)="cambiarcolor($event)">About</a>
+          </div>
+
+<!--Creando estos 3 botones con un *ngFor seria:          
+<div class="col-2 espacio " *ngFor = "let entry of arr_botons | keyvalue">   //el pipe y poner keyvalue permite que podemos coger tanto la clave como el valor de cada elemento
+  <a [routerLink]="['/', entry.key']" style="text-decoration: none; " [ngClass]="{ 'blanco': entry.value, 'gris': !entry.value }" (click)="cambiarcolor($event)">{{entry.key}}</a> 
+</div>
+-->
+          <div class="col-5 espacio">
+            <a href="https://github.com/MscottB/Ejemplo-SPA-Angular-Heroes" style="text-decoration: none " [ngClass]="{ 'blanco': git_hub, 'gris': !git_hub }" (click)="cambiarcolor_github()" >Code GitHub</a> <!--text-decoration:none lo tenenmos porque sino nos sale subrallado-->
+          </div>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" style="text-align: center" type="search" placeholder="Buscar Heroe" aria-label="Search" (keypress)="regresar()" (keyup)="cargar(textobusqueda.value)" #textobusqueda> <!--cuando ponemos almohadilla es para indicar un nombre de una variable, a través de la cual identificamos un elemento-->
+        <button class="btn btn-outline-success color text-align: center" style="padding: 5px 60px;" type="submit" (click)="buscar()" [routerLink]="['/buscador']">Buscador</button> <!--con keyup guardamos los valores del search en una variable en el ts-->
+      </form>
+    </div>
+  </div>
+</nav>

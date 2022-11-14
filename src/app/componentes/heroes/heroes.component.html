@@ -1,0 +1,27 @@
+
+<div *ngIf="personaje===''; then content else other_content"></div>
+      <ng-template #content><p style="padding-left:10px;"><b style="font-size: 40px">Heroes</b><span style="font-size: 36px; margin-left: 20px">Marvel vs DC</span></p></ng-template>
+      <ng-template #other_content><p style="padding-left:10px;"><b style="font-size: 40px">Buscando:</b><span style="font-size: 36px; margin-left: 20px">{{personaje}}</span></p></ng-template>
+
+
+<div class="container-fluid" >
+      <div class="row" >
+                  <div class="col-4" *ngFor = "let first_array of array_cols"> <!--con cada iteración en el ngfor se crea un COLUMNA mas-->
+                  <div *ngFor = "let item_second_array of first_array"><!--con cada iteración en el ngfor se crea un CARD mas para esa columna-->
+                        <div class="card-container" style="width: 22rem;" *ngFor = "let item of array_heroes">
+                              <div *ngIf="item_second_array == item.id"> 
+                                    <div class="card" style=" border-color : hsl(0, 11%, 88%); margin-top: 10px">
+                                          <img class="card-img-top" src={{item.img}} alt="Card image cap">
+                                          <div class="card-body">
+                                                <h5 class="card-title"> {{item.nombre}}</h5>
+                                                <p class="card-text">{{item.bio}}</p>
+                                                <p class="card-text" style="color : hsl(0, 2%, 39%); font-size:12px">{{item.aparicion.split("-").slice(2)}}-{{item.aparicion.split("-",2)[1]}}-{{item.aparicion.split("-",1)}}</p>
+                                                <div class="row">              <!-- esta row la a hacemos para que el boton se estire a lo largo de la card-->
+                                                <a href="#" class="btn btn-outline-primary"  style="border-color:hsl(215, 87%, 57%); border-radius: 5px" [routerLink]="['/heroe', item.id]">Ver Mas</a>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                  </div> 
+            </div>
+</div>

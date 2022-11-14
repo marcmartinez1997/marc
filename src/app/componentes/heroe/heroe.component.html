@@ -1,0 +1,35 @@
+<!--este componente puede mostrar por pantalla dos cosas: la información de UN personaje con su imagen, o un mensaje diciendo que lo que se busca por el search No se ha encontrado-->
+<div *ngIf="string_no_encontrado; then content else other_content"></div>
+<ng-template #content><p style="font-size: 30px;">No existen resultados con el termino: <span style="font-size: 36px; margin-left: 20px">{{id}}</span></p></ng-template>
+<ng-template #other_content>
+      <div class="row" style="padding-left:20px; padding-top:20px">
+          <p> <span style="font-size: 37px; font-weight: 600;">{{this.heroe.nombre| uppercase}}</span><span style="font-size: 30px; margin-left: 20px">({{this.heroe.aparicion|date:'yyyy'}})</span></p> <!--usamos la funcion .split() para seleccionar solo la parte que nos interesa de la fecha-->
+      </div>
+      <!--la variable heroe es importada del javascript, le ponemos el this delante. Esta variable contiene lo datos del personaje a mostrar-->
+      <div class="row">
+              <div class="col-4 card" style="width:30%; border-style:none"> <!--con doble corchete {{}} se puede hacer referencia a variables creadas en el js-->
+                    <img class="card-img-top" src={{this.heroe.img}} alt="Card image cap">
+                    <div class="card-body">
+                      <div class="row" style="padding: 30px 10px 30px 10px;">  <!-- esta row la a hacemos para que el boton se estire a lo largo de la card-->
+                        <button [routerLink]="['/heroes','']" style=" border-width: 1px; border-color : hsl(0, 100%, 50%); border-radius: 5px">
+                            <p class=" link-danger" style="padding-top: 10px;" >Regresar</p>
+                        </button>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-7">
+                <p style="padding-bottom:0px; font-size: 30px; font-weight: 500; text-transform:capitalize">{{this.heroe.nombre}}</p>
+                <p style=" font-size: 15px; font-weight: 200px; text-transform:capitalize">{{this.heroe.bio}}</p>
+                <div *ngIf="marvel;then content else other_content"></div>
+                      <ng-template #content><img style="width:20%" src="assets/img/marvel.png" alt="image"> </ng-template>
+                      <ng-template #other_content><img style="width:20%" src="assets/img/DC.jpg" alt="image"></ng-template>
+                </div>
+      </div>
+</ng-template>
+
+
+
+
+
+      
+        
